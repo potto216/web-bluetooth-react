@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 
+import BluetoothConnector from './BluetoothConnector';
+
 function App() {
   return (
     <div className="App">
@@ -17,9 +19,16 @@ function App() {
         >
           Learn React
         </a>
+        <BluetoothConnector />
       </header>
+
+
     </div>
   );
 }
+// Todo write function to display the data from the bluetooth device  on the screen 
+function displayData(data) {
+  console.log(data);
+}       
 
 export default App;
