@@ -2,6 +2,16 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Use HTTPS
+To use HTTPS modify the `react-scripts start` in `package.json` to
+```
+  "scripts": {
+    "start": "HTTPS=true SSL_CRT_FILE=./pki/server_hosts_name.bundle.cer.pem SSL_KEY_FILE=./pki/server.key.pem react-scripts start",
+```
+
+The bundle should be formed with the server cert first, then the Intermediate CA and last the Root CA as:
+cat server_hosts_name.cer.pem ~/pki/intermediateCA/ca/intermediateCA.cer.pem ~/pki/rootCA/ca/rootCA.cer.pem > server_hosts_name.bundle.cer.pem
+
 ## Available Scripts
 
 In the project directory, you can run:
