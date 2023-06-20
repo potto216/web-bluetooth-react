@@ -15,29 +15,27 @@ const GATTCharacteristicControl = ({ name, uuid, isReadOnly }) => {
     };
 
     const handleRead = useCallback(async () => {
+        console.log("GATTCharacteristicControl.js handleRead() called with uuid", uuid);
         const value = await readValue(serviceUuid, uuid);
         setValue(value);
     }, [readValue, uuid]);
 
     useEffect(() => {
+        console.log("GATTCharacteristicControl.js useEffect() called");
         handleRead();
+
     }, [handleRead]);
+
+    console.log("GATTCharacteristicControl.js return() called value is ", value.toString(), " is null ", value===null, " type is ", typeof value);
 
     return (
         <div>
-            <label htmlFor={uuid + "-name"}>{name}</label>
-            <input id={uuid + "-name"} type="text" value={name} readOnly={true} />
-
-            <label htmlFor={uuid + "-uuid"}>{uuid}</label>
-            <input id={uuid + "-uuid"} type="text" value={uuid} readOnly={true} />
-
-            <label htmlFor={uuid + "-value"}>Value</label>
+            <label htmlFor={uuid + "-name"}>{name + ": "}</label>
             <input
                 id={uuid + "-value"}
                 type="text"
-                value={value}
+                value={value==="" ? "" : value.getUint8(0)}
                 disabled={isReadOnly}
-                onChange={(event) => setValue(event.target.value)}
             />
 
             <button
@@ -48,5 +46,7 @@ const GATTCharacteristicControl = ({ name, uuid, isReadOnly }) => {
         </div>
     );
 };
+
+//  onChange={(event) => setValue(event.target.value)}
 
 export default GATTCharacteristicControl;

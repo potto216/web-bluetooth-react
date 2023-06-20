@@ -60,11 +60,11 @@ export const BluetoothProvider = ({ children }) => {
             const value = await characteristic.readValue();
             console.log('Hardware Revision: ' + value.getUint8(0)); */
       
-            const ramp_service = await gattServer.getPrimaryService('b3f8665e-9514-11ed-9f96-37eb16895c01')
+            /*const ramp_service = await gattServer.getPrimaryService('b3f8665e-9514-11ed-9f96-37eb16895c01')
             const ramp_min_value_characteristic = await ramp_service.getCharacteristic('b5720d32-9514-11ed-985d-7300cdba6b00');
             const ramp_min_value = await ramp_min_value_characteristic.readValue();
             console.log('ramp_min_value: ' + ramp_min_value.getUint8(0));
-      
+      */
             setDevice(device);
             setServer(gattServer);
       

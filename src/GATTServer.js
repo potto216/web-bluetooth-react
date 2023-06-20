@@ -10,8 +10,9 @@ const charRampCurrentValueUuid = 'b5720d32-9514-11ed-985d-7300cdba6b02'; // Ramp
 
 
 const GATTServer = () => {
-    const { connectToDevice, disconnectFromDevice } = useContext(BluetoothContext);
+    const { device, connectToDevice, disconnectFromDevice } = useContext(BluetoothContext);
 
+/*
     useEffect(() => {
         const connect = async () => {
             console.log("GATTServer.js connect() called");
@@ -33,15 +34,38 @@ const GATTServer = () => {
             disconnectFromDevice();
         };
     }, [connectToDevice, disconnectFromDevice]);
+*/
+    if (!device) {
+        console.log("GATTServer.js device is null");
+        return (
+            <div>
+                <h1>GATT Server</h1>
+                <p>Connecting...</p>
+            </div>
+        );
+    }
+    else if (!device.gatt.connected) {
+        console.log("GATTServer.js device.gatt.connected is false");
+        return (
+            <div>
+                <h1>GATT Server</h1>
+                <p>Connecting...</p>
+            </div>
+        );
 
-    return (
-        <div>
-            <h1>GATT Server</h1>
-            <GATTCharacteristicControl name="Ramp Min Value" uuid={charRampMinValueUuid} isReadOnly={false} />
-            <GATTCharacteristicControl name="Ramp Max Value" uuid={charRampMaxValueUuid} isReadOnly={false} />
-            <GATTCharacteristicControl name="Ramp Current Value" uuid={charRampCurrentValueUuid} isReadOnly={true} />
-        </div>
-    );
+    }
+    else if (device.gatt.connected) {
+        console.log("GATTServer.js device.gatt.connected is true");
+
+        return (
+            <div>
+                <h1>GATT Server</h1>
+                <GATTCharacteristicControl name="Ramp Min Value" uuid={charRampMinValueUuid} isReadOnly={false} />
+                <GATTCharacteristicControl name="Ramp Max Value" uuid={charRampMaxValueUuid} isReadOnly={false} />
+                <GATTCharacteristicControl name="Ramp Current Value" uuid={charRampCurrentValueUuid} isReadOnly={true} />
+            </div>
+        );
+    }
 };
 
 export default GATTServer;
