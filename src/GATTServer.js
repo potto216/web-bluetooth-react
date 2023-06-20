@@ -6,6 +6,7 @@ const serviceUuid = 'b3f8665e-9514-11ed-9f96-37eb16895c01'; //  Ramp Counter 1
 const charRampMinValueUuid = 'b5720d32-9514-11ed-985d-7300cdba6b00'; // Ramp Min Value 
 const charRampMaxValueUuid = 'b5720d32-9514-11ed-985d-7300cdba6b01'; // Ramp Max Value
 const charRampCurrentValueUuid = 'b5720d32-9514-11ed-985d-7300cdba6b02'; // Ramp Current Value
+const charRampCommandValueUuid = 'b5720d32-9514-11ed-985d-7300cdba6b03'; // Command
 
 
 
@@ -39,8 +40,6 @@ const GATTServer = () => {
         console.log("GATTServer.js device is null");
         return (
             <div>
-                <h1>GATT Server</h1>
-                <p>Connecting...</p>
             </div>
         );
     }
@@ -48,8 +47,6 @@ const GATTServer = () => {
         console.log("GATTServer.js device.gatt.connected is false");
         return (
             <div>
-                <h1>GATT Server</h1>
-                <p>Connecting...</p>
             </div>
         );
 
@@ -59,10 +56,11 @@ const GATTServer = () => {
 
         return (
             <div>
-                <h1>GATT Server</h1>
-                <GATTCharacteristicControl name="Ramp Min Value" uuid={charRampMinValueUuid} isReadOnly={false} />
-                <GATTCharacteristicControl name="Ramp Max Value" uuid={charRampMaxValueUuid} isReadOnly={false} />
-                <GATTCharacteristicControl name="Ramp Current Value" uuid={charRampCurrentValueUuid} isReadOnly={true} />
+                <h3>GATT Server</h3>
+                <GATTCharacteristicControl name="Ramp Min Value" uuid={charRampMinValueUuid} isReadOnly={false} isWriteOnly={false}/>
+                <GATTCharacteristicControl name="Ramp Max Value" uuid={charRampMaxValueUuid} isReadOnly={false} isWriteOnly={false}/>
+                <GATTCharacteristicControl name="Ramp Current Value" uuid={charRampCurrentValueUuid} isReadOnly={true} isWriteOnly={false}/>
+                <GATTCharacteristicControl name="Ramp Command" uuid={charRampCommandValueUuid} isReadOnly={false} isWriteOnly={true}/>
             </div>
         );
     }

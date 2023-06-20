@@ -26,7 +26,7 @@ export const BluetoothProvider = ({ children }) => {
         // Web Bluetooth API is not available; show an error message or fallback behavior
         console.error("Web Bluetooth API is not available in this browser.");
       }
-    
+      console.log("About to run enableBluetooth from BluetoothProvider");
       enableBluetooth()  
 
 
