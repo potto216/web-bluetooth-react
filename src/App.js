@@ -1,43 +1,21 @@
-import logo from './logo.svg';
+import logo from './teledyne_lecroy_logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 
-import BluetoothConnector from './BluetoothConnector';
+//import BluetoothConnector from './BluetoothConnector';
 import { BluetoothProvider } from './BluetoothContext';
 import GATTServer from './GATTServer';
 
 function App() {
 
-/*  
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <BluetoothConnector />
-      </header>
 
-
-    </div>
-  );
-*/  
- 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <BluetoothProvider>
             <GATTServer />
         </BluetoothProvider>
+        <img src={logo} className="App-logo" alt="logo" />
       </header>
 
 

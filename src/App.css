@@ -3,15 +3,18 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 20vmin; /* Change this value to adjust the size */
   pointer-events: none;
 }
 
+/* Comment out or remove this media query to stop the rotation */
+/*
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
+*/
 
 .App-header {
   background-color: #282c34;
@@ -28,6 +31,8 @@
   color: #61dafb;
 }
 
+/* You can also comment out or remove this keyframes if it's not used elsewhere */
+/*
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -35,4 +40,13 @@
   to {
     transform: rotate(360deg);
   }
+}
+*/
+
+.large-button {
+  font-size: 20px; /* Larger font size */
+  padding: 10px 20px; /* More padding for larger button */
+  width: 200px; /* Specific width, optional */
+  height: 50px; /* Specific height, optional */
+  /* Add more styling as needed */
 }

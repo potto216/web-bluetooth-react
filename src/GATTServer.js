@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { BluetoothContext } from './BluetoothContext';
 import GATTCharacteristicControl from './GATTCharacteristicControl';
+import GATTCharacteristicControlDropdown from './GATTCharacteristicControlDropdown';
 
 const serviceUuid = 'b3f8665e-9514-11ed-9f96-37eb16895c01'; //  Ramp Counter 1
 const charRampMinValueUuid = 'b5720d32-9514-11ed-985d-7300cdba6b00'; // Ramp Min Value 
@@ -60,7 +61,7 @@ const GATTServer = () => {
                 <GATTCharacteristicControl name="Ramp Min Value" uuid={charRampMinValueUuid} isReadOnly={false} isWriteOnly={false}/>
                 <GATTCharacteristicControl name="Ramp Max Value" uuid={charRampMaxValueUuid} isReadOnly={false} isWriteOnly={false}/>
                 <GATTCharacteristicControl name="Ramp Current Value" uuid={charRampCurrentValueUuid} isReadOnly={true} isWriteOnly={false}/>
-                <GATTCharacteristicControl name="Ramp Command" uuid={charRampCommandValueUuid} isReadOnly={false} isWriteOnly={true}/>
+                <GATTCharacteristicControlDropdown name="Ramp Command" uuid={charRampCommandValueUuid} isReadOnly={false} isWriteOnly={true}/>
             </div>
         );
     }

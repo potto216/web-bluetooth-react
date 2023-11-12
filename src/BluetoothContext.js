@@ -46,7 +46,7 @@ export const BluetoothProvider = ({ children }) => {
               {
                 filters: [{
                   services: ['b3f8665e-9514-11ed-9f96-37eb16895c01'],
-                   name:'DV'
+                   name:'GATT_Server'
                 }]
                 
               });
@@ -83,31 +83,49 @@ export const BluetoothProvider = ({ children }) => {
     }, [device]);
 
     const writeValue = async (serviceUuid, characteristicUuid, value) => {
-        const service = await server.getPrimaryService(serviceUuid);
-        const characteristic = await service.getCharacteristic(characteristicUuid);
-        await characteristic.writeValue(value);
-    };
+      const service = await server.getPrimaryService(serviceUuid);
+      const characteristic = await service.getCharacteristic(characteristicUuid);
+      await characteristic.writeValue(value);
+  };
 
-    const readValue = async (serviceUuid, characteristicUuid) => {
-        const service = await server.getPrimaryService(serviceUuid);
-        const characteristic = await service.getCharacteristic(characteristicUuid);
-        const value = await characteristic.readValue();
-        return value;
-    };
+  const readValue = async (serviceUuid, characteristicUuid) => {
+      const service = await server.getPrimaryService(serviceUuid);
+      const characteristic = await service.getCharacteristic(characteristicUuid);
+      return await characteristic.readValue();
+  };
+
+  const startNotifications = async (serviceUuid, characteristicUuid, callback) => {
+      const service = await server.getPrimaryService(serviceUuid);
+      const characteristic = await service.getCharacteristic(characteristicUuid);
+      characteristic.addEventListener('characteristicvaluechanged', callback);
+      await characteristic.startNotifications();
+  };
+
+  const stopNotifications = async (serviceUuid, characteristicUuid) => {
+      const service = await server.getPrimaryService(serviceUuid);
+      const characteristic = await service.getCharacteristic(characteristicUuid);
+      characteristic.removeEventListener('characteristicvaluechanged', characteristic.value);
+      await characteristic.stopNotifications();
+  };
+
 
     return (
-        <BluetoothContext.Provider
-            value={{
-                device,
-                connectToDevice,
-                disconnectFromDevice,
-                writeValue,
-                readValue
-            }}
+      <BluetoothContext.Provider
+      value={{
+          device,
+          connectToDevice,
+          disconnectFromDevice,
+          writeValue,
+          readValue,
+          startNotifications,
+          stopNotifications
+      }}
         >
-       <h1>Web Bluetooth with React</h1>
+      <h1>Web Bluetooth demo with Wireless Protocol Suite</h1>
+      <button  className="large-button" onClick={connectToDevice}>Connect</button>
       {device ? <p>Connected to: {device.name}</p> : <p>Not connected</p>}
-      <button onClick={connectToDevice}>Connect</button>
+      <p></p>
+
       {children}
       </BluetoothContext.Provider>
     );
