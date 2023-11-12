@@ -29,19 +29,8 @@ export const BluetoothProvider = ({ children }) => {
       console.log("About to run enableBluetooth from BluetoothProvider");
       enableBluetooth()  
 
-
     const connectToDevice = useCallback(async (device) => {
-
-        try {
-          
-            /*
-            const device = await navigator.bluetooth.requestDevice({
-              filters: [{ services: ['device_information'] }],
-            });
-            */
-            //Bluetooth device 58:bf:25:9c:50:7e advertising and waiting for connections...
-      
-          
+        try {   
             const device = await navigator.bluetooth.requestDevice(
               {
                 filters: [{
@@ -52,20 +41,7 @@ export const BluetoothProvider = ({ children }) => {
               });
       
             setDevice(device);
-            
             const gattServer = await device.gatt.connect();
-            /*
-            const service = await gattServer.getPrimaryService('device_information');
-            const characteristic = await service.getCharacteristic('hardware_revision_string');
-            const value = await characteristic.readValue();
-            console.log('Hardware Revision: ' + value.getUint8(0)); */
-      
-            /*const ramp_service = await gattServer.getPrimaryService('b3f8665e-9514-11ed-9f96-37eb16895c01')
-            const ramp_min_value_characteristic = await ramp_service.getCharacteristic('b5720d32-9514-11ed-985d-7300cdba6b00');
-            const ramp_min_value = await ramp_min_value_characteristic.readValue();
-            console.log('ramp_min_value: ' + ramp_min_value.getUint8(0));
-      */
-            setDevice(device);
             setServer(gattServer);
       
           } catch (error) {
@@ -82,7 +58,7 @@ export const BluetoothProvider = ({ children }) => {
         }
     }, [device]);
 
-    const writeValue = async (serviceUuid, characteristicUuid, value) => {
+  const writeValue = async (serviceUuid, characteristicUuid, value) => {
       const service = await server.getPrimaryService(serviceUuid);
       const characteristic = await service.getCharacteristic(characteristicUuid);
       await characteristic.writeValue(value);
@@ -108,8 +84,15 @@ export const BluetoothProvider = ({ children }) => {
       await characteristic.stopNotifications();
   };
 
+  const handleConnectionButtonClick = () => {
+    if (device && device.gatt.connected) {
+        disconnectFromDevice();
+    } else {
+        connectToDevice();
+    }
+  };
 
-    return (
+  return (
       <BluetoothContext.Provider
       value={{
           device,
@@ -122,13 +105,14 @@ export const BluetoothProvider = ({ children }) => {
       }}
         >
       <h1>Web Bluetooth demo with Wireless Protocol Suite</h1>
-      <button  className="large-button" onClick={connectToDevice}>Connect</button>
+      <button  className="large-button"onClick={handleConnectionButtonClick}>
+                {device && device.gatt.connected ? 'Disconnect' : 'Connect'}
+      </button>
       {device ? <p>Connected to: {device.name}</p> : <p>Not connected</p>}
-      <p></p>
 
       {children}
       </BluetoothContext.Provider>
     );
 };
 
-//    
+export default BluetoothProvider;

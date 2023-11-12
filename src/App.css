@@ -3,7 +3,7 @@
 }
 
 .App-logo {
-  height: 20vmin; /* Change this value to adjust the size */
+  height: 10vmin; /* Change this value to adjust the size */
   pointer-events: none;
 }
 
@@ -49,4 +49,31 @@
   width: 200px; /* Specific width, optional */
   height: 50px; /* Specific height, optional */
   /* Add more styling as needed */
+}
+
+.gatt-server {
+  display: flex;
+  justify-content: space-between;
+}
+
+.gatt-controls  {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.gatt-plot {
+  flex: 1;
+  padding: 10px;
+}
+
+/* In your CSS file */
+.input-width-ch {
+  width: 4ch; /* Set the desired character count */
+}
+
+/* In your CSS file */
+.chart-container {
+  width: 900px;
+  height: 900px;
 }

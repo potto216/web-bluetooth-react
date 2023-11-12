@@ -2,19 +2,8 @@ import React, { useState, useContext, useEffect, useCallback } from 'react';
 import { BluetoothContext } from './BluetoothContext';
 
 const serviceUuid = 'b3f8665e-9514-11ed-9f96-37eb16895c01'; //  Ramp Counter 1
-/*
-static constexpr byte RAMP_COMMAND_STOP = 0;
-static constexpr byte RAMP_COMMAND_START = 1;
-static constexpr byte RAMP_COMMAND_RESET = 2;
-static constexpr byte RAMP_COMMAND_TEST_IO = 3;
 
-
-static constexpr  RAMP_COMMAND_STOP_TEXT = "Stop Counter";
-static constexpr  RAMP_COMMAND_START = "Start Counter";
-static constexpr  RAMP_COMMAND_RESET = "Reset Counter";
-static constexpr  RAMP_COMMAND_TEST_IO = "Test IO";
-*/
-const GATTCharacteristicControl = ({ name, uuid, isReadOnly, isWriteOnly }) => {
+const GATTCharacteristicControl = ({ name, uuid, isReadOnly, isWriteOnly, enableNotifications=true  }) => {
     const {  writeValue, readValue, startNotifications, stopNotifications  } = useContext(BluetoothContext);
     const [value, setValue] = useState("");
     const [notificationsEnabled, setNotificationsEnabled] = useState(false);
@@ -66,7 +55,6 @@ const GATTCharacteristicControl = ({ name, uuid, isReadOnly, isWriteOnly }) => {
         console.log("GATTCharacteristicControl.js showChange() called with event", event.target.value);
         console.log("GATTCharacteristicControl.js showChange() isWriteOnly is ", isWriteOnly);
         setValue(event.target.value)
-        //setValue(event.target.value)
     }
 
     useEffect(() => {
@@ -86,6 +74,7 @@ const GATTCharacteristicControl = ({ name, uuid, isReadOnly, isWriteOnly }) => {
                 value={value}
                 disabled={isReadOnly}
                 onChange={showChange}
+                className="input-width-ch" // Applying the CSS class
             />
 
             <button
@@ -94,10 +83,12 @@ const GATTCharacteristicControl = ({ name, uuid, isReadOnly, isWriteOnly }) => {
                 Update
             </button>
 
-            { /* Add a button or switch to toggle notifications */ }
-            <button onClick={toggleNotifications}>
-                {notificationsEnabled ? 'Stop Notifications' : 'Start Notifications'}
-            </button>
+            {/* Conditional rendering of notification button */}
+            {enableNotifications && (
+                <button onClick={toggleNotifications}>
+                    {notificationsEnabled ? 'Stop Notifications' : 'Start Notifications'}
+                </button>
+            )}
             
         </div>
     );
