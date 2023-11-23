@@ -121,7 +121,7 @@ const GATTCharacteristicControlPlot = ({ name, uuid, isReadOnly, isWriteOnly, da
 
     return (
         <div>
-            <label htmlFor={uuid + "-name"}>{name + ": "}</label>
+            <label htmlFor={uuid + "-name"} className="label-class">{name + ": "}</label>
             <input
                 id={uuid + "-value"}
                 type="text"

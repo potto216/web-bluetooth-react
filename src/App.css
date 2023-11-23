@@ -42,7 +42,10 @@
   }
 }
 */
+.label-class {
 
+  font-size: 20px
+}
 .large-button {
   font-size: 20px; /* Larger font size */
   padding: 10px 20px; /* More padding for larger button */

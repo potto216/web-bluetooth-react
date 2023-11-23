@@ -67,7 +67,7 @@ const GATTCharacteristicControl = ({ name, uuid, isReadOnly, isWriteOnly, enable
 
     return (
         <div>
-            <label htmlFor={uuid + "-name"}>{name + ": "}</label>
+            <label htmlFor={uuid + "-name"} className="label-class" >{name + ": "}</label>
             <input
                 id={uuid + "-value"}
                 type="text"

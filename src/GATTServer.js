@@ -67,13 +67,13 @@ const GATTServer = () => {
                 <div className="gatt-controls">
                 <br></br>
                 <br></br>
-                <GATTCharacteristicControl name="Counter Min Value" uuid={charRampMinValueUuid} isReadOnly={false} isWriteOnly={false} enableNotifications={false}/>
-                <GATTCharacteristicControl name="Counter Max Value" uuid={charRampMaxValueUuid} isReadOnly={false} isWriteOnly={false} enableNotifications={false}/>
-                <GATTCharacteristicControl name="Counter Step Time" uuid={charRampStepTimeUuid} isReadOnly={false} isWriteOnly={false} enableNotifications={false}/>
-                <GATTCharacteristicControl name="Counter Status" uuid={charRampStatusUuid} isReadOnly={true} isWriteOnly={false}/>
+                <GATTCharacteristicControl name="Min Value" uuid={charRampMinValueUuid} isReadOnly={false} isWriteOnly={false} enableNotifications={false}/>
+                <GATTCharacteristicControl name="Max Value" uuid={charRampMaxValueUuid} isReadOnly={false} isWriteOnly={false} enableNotifications={false}/>
+                <GATTCharacteristicControl name="Step Time" uuid={charRampStepTimeUuid} isReadOnly={false} isWriteOnly={false} enableNotifications={false}/>
+                <GATTCharacteristicControl name="Status" uuid={charRampStatusUuid} isReadOnly={true} isWriteOnly={false}/>
                  <br></br>      
-                <GATTCharacteristicControlDropdown name="Counter Command" uuid={charRampCommandValueUuid} isReadOnly={false} isWriteOnly={true}/>
-                <GATTCharacteristicControl name="Command Status" uuid={charRampCommandStatusUuid} isReadOnly={true} isWriteOnly={false}/>
+                <GATTCharacteristicControlDropdown name="Command" uuid={charRampCommandValueUuid} isReadOnly={false} isWriteOnly={true}/>
+                { /*<GATTCharacteristicControl name="Command Status" uuid={charRampCommandStatusUuid} isReadOnly={true} isWriteOnly={false}/> */}
 
                     
                 </div>
@@ -83,7 +83,7 @@ const GATTServer = () => {
                 <br></br>
             </div>
             <br></br>
-            <br></br>
+
             </div>
         );
     }

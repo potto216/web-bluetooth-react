@@ -37,7 +37,7 @@ const GATTCharacteristicControlDropdown = ({ name, uuid, isReadOnly, isWriteOnly
 
     return (
         <div>
-            <label htmlFor={uuid + "-name"}>{name + ": "}</label>
+            <label htmlFor={uuid + "-name"} className="label-class">{name + ": "}</label>
             <select
                 id={uuid + "-value"}
                 value={value}
